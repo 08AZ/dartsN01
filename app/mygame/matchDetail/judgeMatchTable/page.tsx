@@ -10,7 +10,7 @@ interface RequestData {
   timestamp: number;
   data: any;
 }
-import React, {useEffect, useRef, useState} from "react"
+import React, {Suspense, useEffect, useRef, useState} from "react"
 import Cookie from "js-cookie"
 import { useSearchParams } from "next/navigation"
 import {MatchDetailProps} from "@/app/mygame/matchDetail/checkMatchTable/page";
@@ -49,7 +49,7 @@ const defaultMatchDetailProps:MatchDetailProps = {
 }
 
 
-export default function JudgePage() {
+ function JudgePage() {
     const [completed, setCompleted] = useState<boolean>(false)
     const [auth, setAuth] = useState<string>("")
     const [matchDetail, setMatchDetail] = useState<MatchDetailProps>(defaultMatchDetailProps)
@@ -498,3 +498,10 @@ export default function JudgePage() {
         )
     }
 
+export default function JudgePageSus() {
+  return (
+    <Suspense fallback={<div>加载中...</div>}>
+      <JudgePage />
+    </Suspense>
+  )
+}

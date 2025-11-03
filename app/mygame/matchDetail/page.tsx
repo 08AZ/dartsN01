@@ -1,6 +1,6 @@
 'use client'
 import {useSearchParams} from "next/navigation";
-import React, {useEffect, useState} from 'react'
+import React, {Suspense, useEffect, useState} from 'react'
 import {DataType} from "csstype";
 import { useRouter } from 'next/navigation';
 import ToLast from "@/components/ui/to-last-buttom";
@@ -144,7 +144,7 @@ const defaultMatches: Match[] = [
   },
 ]
 
-export default function BracketTree() {
+function BracketTree() {
   const router = useRouter();
   const [matchName, setMatchName] = useState('飞镖比赛')
   const [matches, setMatches] = useState<Match[]>([])
@@ -411,4 +411,11 @@ export default function BracketTree() {
     <Modal isOpen={isOpen} onClose={()=>{setIsOpen(false)}} matchId={roundId}></Modal>
   </div>
 
+}
+export default function Page() {
+  return (
+    <Suspense fallback={<div>加载中...</div>}>
+      <BracketTree/>
+    </Suspense>
+  )
 }

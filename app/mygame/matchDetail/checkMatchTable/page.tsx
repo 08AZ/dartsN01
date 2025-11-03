@@ -1,5 +1,5 @@
 'use client'
-import React,{useState,useEffect} from "react";
+import React,{useState,useEffect, Suspense} from "react";
 import {useSearchParams} from "next/navigation";
 import ToLast from "@/components/ui/to-last-buttom";
 export interface player{
@@ -55,7 +55,7 @@ const defaultMatchDetailProps:MatchDetailProps = {
     p1TotalScore:2,
     p2TotalScore:1
 }
-export default function MatchTable() {
+ function MatchTable() {
     const [matchDetail, setMatchDetail] = useState<MatchDetailProps>(defaultMatchDetailProps);
     const searchParams = useSearchParams()
     const roundId =searchParams.get("roundId")
@@ -162,4 +162,11 @@ export default function MatchTable() {
 
         </div>
     )
+}
+export default function JudgePage() {
+  return (
+    <Suspense fallback={<div>加载中...</div>}>
+      <MatchTable />
+    </Suspense>
+  )
 }
