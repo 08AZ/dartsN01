@@ -1,11 +1,11 @@
 "use client"
-import type React from "react"
+import React, {Suspense} from "react"
 import { useState } from "react"
 import { useRouter } from 'next/navigation';
 import ToMenu from "@/components/ui/to-last-buttom";
 import Cookies from "js-cookie";
 import {useSearchParams} from "next/navigation";
-export default function PublishGame() {
+function PublishGame() {
     const router = useRouter();
     const searchParams = useSearchParams()
     const JudgeCode=searchParams.get("JudgeCode")
@@ -51,5 +51,12 @@ export default function PublishGame() {
 
 
 
+    )
+}
+export default function PublishGamePage(){
+    return (
+        <Suspense>
+            <PublishGame/>
+        </Suspense>
     )
 }
