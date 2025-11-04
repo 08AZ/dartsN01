@@ -29,7 +29,8 @@ const ProtectedLink:React.FC<ProtectedLinkProps> = ({ href, children, className 
     } else {
       // 如果未登录，可以提示用户登录，或者重定向到登录页面
       alert('Please log in first');
-      router.push('/'); // 重定向到登录页面
+      router.push(href); // 如果已登录，跳转到指定页面
+
     }
   };
 
